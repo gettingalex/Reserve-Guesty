@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Guesty Reports and Listings</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Reserver - Séjour de Rêve</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!--Script-->
+    <script src="jquery.js"></script>
+    <script src="jquery-ui.js"></script>
+    <script src="script.js"></script>
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div class="container">
+      <header class="blog-header py-1" id="top">
+       <!-- <div class="row flex-nowrap justify-content-between align-items-center">
+          <div class="col-4 pt-1">
+            <a class="text-muted" href="#"><img src="Fond-transparent-Version-1-NOIR-SDR.png"></a>
+          </div>
+          <div class="col-4 text-center">
+            <a class="blog-header-logo text-dark" href="#">Séjour de Rêve</a>
+          </div>
+          <div class="col-4 d-flex justify-content-end align-items-center">
+          </div>
+        </div>
+      -->
+      </header>
+      <div class="jumbotron p-0 md-1 text-white bg-dark">
+          <img src="sejourdereve.png" class="img-fluid" alt="Responsive image">
+      </div>
+      <section class="jumbotron text-center bg-light pb-5">
+        <div class="container">
+          <h3 class="pb-1">Vérifier les disponibilités</h3>
+          <div class="input-group">
+            <select name="Category">
+          <!-- {% for i in categories %} -->
+            <option value="{{i.name}}">{{i.name}}</option>
+          <!-- {% endfor %} -->
+            </select>
+            <div class="input-group-prepend">
+              <span class="input-group-text">Arrivé</span>
+            </div>
+            <input type="text" id="datepicker" class="form-control">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Départ</span>
+            </div>
+            <input type="text" id="datepicker2" class="form-control">
+          </div>
+          <input class="mt-2" type="submit" value="Soumettre">
+        </div>
+      </section>
+
+    <footer class="blog-footer">
+      <p>DreaminGetAway</p>
+      <p><a href="#top">Back to top</a></p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </body>
+</html>
