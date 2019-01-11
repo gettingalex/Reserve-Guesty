@@ -33,9 +33,23 @@
       </div>
       <section class="jumbotron text-center bg-light pb-5">
         <div class="container">
-              <h3 class="pb-1">Vérifier les disponibilités</h3>
-              <input type="text" id="datepicker"/>
-              <input type="text" id="datepicker2"/>
+          <h3 class="pb-1">Vérifier les disponibilités</h3>
+          <div class="input-group">
+            <select name="Category">
+          <!-- {% for i in categories %} -->
+            <option value="{{i.name}}">{{i.name}}</option>
+          <!-- {% endfor %} -->
+            </select>
+            <div class="input-group-prepend">
+              <span class="input-group-text">Arrivé</span>
+            </div>
+            <input type="text" id="datepicker" class="form-control">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Départ</span>
+            </div>
+            <input type="text" id="datepicker2" class="form-control">
+          </div>
+          <input class="mt-2" type="submit" value="Soumettre">
         </div>
       </section>
 
