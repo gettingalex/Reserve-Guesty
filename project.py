@@ -16,11 +16,22 @@ def checkDate():
     user = "***Removed***\"
     password = "***Removed***}"
     resp = requests.get(url, auth=HTTPBasicAuth('removed'\, 'removed'}))
+    if resp.status_code != 200: 
+        print('Status:', resp.status_code, 'Problem with the request. Exiting.')
+        exit()
     data = resp.json()
-    return jsonify(data)
-    
+    results = data['results']
+    newList = []
+    for i in results:
+        newList.append(i['nickname'])
+    return jsonify(newList)
+    # newList=[]
+    # for i in data:
+    #    newList.append(data['results'][i]['_id'])
+    # return jsonify(newList)
 
-
+def listingList():
+    return "test"
 
 
 if __name__ == '__main__':
