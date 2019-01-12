@@ -8,9 +8,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!--Script-->
-    <script src="jquery.js"></script>
-    <script src="jquery-ui.js"></script>
-    <script src="script.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/jquery-ui.js"></script>
+    <script src="static/script.js"></script>
     <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
   </head>
   <body>
@@ -29,29 +29,43 @@
       -->
       </header>
       <div class="jumbotron p-0 md-1 text-white bg-dark">
-          <img src="sejourdereve.png" class="img-fluid" alt="Responsive image">
+          <img src="{{url_for('static', filename='sejourdereve.png')}}" class="img-fluid" alt="Responsive image">
       </div>
       <section class="jumbotron text-center bg-light pb-5">
         <div class="container">
           <h3 class="pb-1">Vérifier les disponibilités</h3>
-          <div class="input-group">
-            <select name="Category">
-          <!-- {% for i in categories %} -->
-            <option value="{{i.name}}">{{i.name}}</option>
-          <!-- {% endfor %} -->
+          <form action="{{url_for('listingForm')}}">
+            <select>
+          {% for i in newList["listings"] %}
+            <option name="unit" value="{{i.id}}">{{i.nickname}}</option>
+          {% endfor %}
             </select>
+          <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">Arrivé</span>
             </div>
-            <input type="text" id="datepicker" class="form-control">
+            <input type="text" name="from" id="datepicker" class="form-control">
             <div class="input-group-prepend">
               <span class="input-group-text">Départ</span>
             </div>
-            <input type="text" id="datepicker2" class="form-control">
+            <input type="text" name="to" id="datepicker2" class="form-control">
           </div>
-          <input class="mt-2" type="submit" value="Soumettre">
+          <button type="submit" name="Soumettre" class="btn-primary btn mt-2"><span>Soumettre</span></button>
+          </form>
         </div>
       </section>
+
+      <div class="flash">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul class="list-unstyled text-center">
+      {% for message in messages %}
+        <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+      </ul>
+        {% endif %}
+      {% endwith %}
+    </div>
 
     <footer class="blog-footer">
       <p>DreaminGetAway</p>

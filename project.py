@@ -10,7 +10,7 @@ from requests.auth import HTTPBasicAuth
 app = Flask(__name__)
 
 @app.route('/')
-@app.route('/hello')
+@app.route('/reserver')
 def checkDate():
     url = "https://api.guesty.com/api/v2/listings/"
     user = "***Removed***\"
@@ -21,17 +21,15 @@ def checkDate():
         exit()
     data = resp.json()
     results = data['results']
-    newList = []
+    newList = {}
+    newList["listings"] = []
+    listings = newList["listings"]
     for i in results:
-        newList.append(i['nickname'])
-    return jsonify(newList)
-    # newList=[]
-    # for i in data:
-    #    newList.append(data['results'][i]['_id'])
-    # return jsonify(newList)
+        listings.append({'nickname' : i['nickname'], 'id': i['_id']})
+    return render_template(
+        'index.html', newList=newList
+        )
 
-def listingList():
-    return "test"
 
 
 if __name__ == '__main__':
