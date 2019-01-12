@@ -34,23 +34,23 @@
       <section class="jumbotron text-center bg-light pb-5">
         <div class="container">
           <h3 class="pb-1">Vérifier les disponibilités</h3>
-          <form action="{{url_for('listingForm')}}">
-            <select>
-          {% for i in newList["listings"] %}
-            <option name="unit" value="{{i.id}}">{{i.nickname}}</option>
-          {% endfor %}
+          <form action="{{url_for('listingForm')}}" method="POST">
+            <select name="unit">
+            {% for i in newList["listings"] %}
+              <option value="{{i.id}}">{{i.nickname}}</option>
+            {% endfor %}
             </select>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Arrivé</span>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Arrivé</span>
+              </div>
+              <input name="from" id="datepicker2" class="form-control" required>
+              <div class="input-group-prepend">
+                <span class="input-group-text">Départ</span>
+              </div>
+              <input name="to" id="datepicker" class="form-control" required>
             </div>
-            <input type="text" name="from" id="datepicker" class="form-control">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Départ</span>
-            </div>
-            <input type="text" name="to" id="datepicker2" class="form-control">
-          </div>
-          <button type="submit" name="Soumettre" class="btn-primary btn mt-2"><span>Soumettre</span></button>
+            <button type="submit" name="Soumettre" class="btn-primary btn mt-2"><span>Soumettre</span></button>
           </form>
         </div>
       </section>
