@@ -62,9 +62,8 @@ def listingForm():
         if allBooked == True:
             flash('Les dates que vous avez selectionnés ne sont pas disponibles.')
         if allFree == True:
-            flash('Les dates selectionnés sont disponibles.')
-            flash(avgNight)
-            flash(subTotal)
+            flash(unit)
+            return render_template('booking.html', avgNight=avgNight, subTotal=subTotal)   
         if allBooked == False and allFree == False:
             flash('Certaines dates selectionné ne sont pas disponibles.')
     else: 

@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Disponibilité et Réservation - Séjour de Rêve</title>
+    <title>Disponibilité et Réservation</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Reserver - Séjour de Rêve</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!--Script-->
@@ -15,7 +16,7 @@
   <body>
     <div class="container">
       <header class="blog-header py-1" id="top">
-       <!-- <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
             <a class="text-muted" href="#"><img src="Fond-transparent-Version-1-NOIR-SDR.png"></a>
           </div>
@@ -25,37 +26,11 @@
           <div class="col-4 d-flex justify-content-end align-items-center">
           </div>
         </div>
-      -->
       </header>
-      <div class="jumbotron p-0 md-1 text-white bg-dark">
-          <img src="{{url_for('static', filename='sejourdereve.png')}}" class="img-fluid" alt="Responsive image">
-      </div>
-      <section class="jumbotron text-center bg-light pb-5">
-        <div class="container">
-          <h3 class="pb-1">Vérifier les disponibilités</h3>
-          <form action="{{url_for('listingForm')}}" method="POST">
-            <select name="unit">
-            {% for i in newList["listings"] %}
-              <option value="{{i.id}}">{{i.nickname}}</option>
-            {% endfor %}
-            </select>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Arrivé</span>
-              </div>
-              <input name="from" id="datepicker" class="form-control" required>
-              <div class="input-group-prepend">
-                <span class="input-group-text">Départ</span>
-              </div>
-              <input name="to" id="datepicker" class="form-control" required>
-            </div>
-            <button type="submit" name="Soumettre" class="btn-primary btn mt-2"><span>Soumettre</span></button>
-          </form>
-        </div>
-      </section>
 
+    <section class="jumbotron text-center bg-light pb-5">
       <div class="flash">
-        {% with messages = get_flashed_messages() %}
+      {% with messages = get_flashed_messages() %}
         {% if messages %}
         <ul class="list-unstyled text-center">
         {% for message in messages %}
@@ -65,14 +40,19 @@
           {% endif %}
         {% endwith %}
       </div>
+      <h4>Les dates selectionnés sont disponibles.</h4>
+      <p>Prix moyen par nuit: {{"%.2f" % avgNight}}$</p>
+      <p>Sous-Total: {{"%.2f" % subTotal}}$</p>
+      <button type="button" name="reserver" class="btn-primary btn mt-2">Réserver</button>
+    </section>
 
-      <footer class="blog-footer">
-        <p>DreaminGetAway</p>
-        <p><a href="#top">Back to top</a></p>
-      </footer>
-    </div>
+    <footer class="blog-footer">
+      <p>DreaminGetAway</p>
+      <p><a href="#top">Back to top</a></p>
+    </footer>
+  </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-  </body>
-</html>
+    </body>
+  </html>
