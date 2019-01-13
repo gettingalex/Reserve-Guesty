@@ -30,12 +30,46 @@ def checkDate():
         'index.html', newList=newList
     )
 
-@app.route('/test', methods=['POST'])
+@app.route('/disponibilites', methods=['POST'])
 def listingForm():
     unit = request.form['unit']
     fromDate = request.form['from']
     toDate = request.form['to']
-    flash("From: " + fromDate + " to: " + toDate + " for unit: " +unit)
+    url = "https://api.guesty.com/api/v2/listings/"+unit+"/calendar?from="+fromDate+"&to="+toDate
+    user = "***Removed***\"
+    password = "***Removed***}"
+    resp = requests.get(url, auth=HTTPBasicAuth(user, password))
+    if resp.status_code != 200: 
+        print('Status:', resp.status_code, 'Problem with the request. Exiting.')
+        exit()
+    data = resp.json()
+    newList = {}
+    newList["listings"] = []
+    listings = newList["listings"]
+    for i in data:
+        listings.append({'date' : i['date'], 'status' : i['status'], 'price' : i['price']})
+    period = listings.pop()
+    allBooked = all(listing['status'] == 'booked' for listing in listings)
+    allFree = all(listing['status'] == 'available' for listing in listings)
+    #Return total price for selected date
+    prices = []
+    for i in listings:
+        prices.append(i['price'])
+    subTotal = sum(prices)
+    avgNight = 0
+    if prices != []:
+        avgNight = subTotal/len(prices)
+        if allBooked == True:
+            flash('Les dates que vous avez selectionnés ne sont pas disponibles.')
+        if allFree == True:
+            flash('Les dates selectionnés sont disponibles.')
+            flash(avgNight)
+            flash(subTotal)
+        if allBooked == False and allFree == False:
+            flash('Certaines dates selectionné ne sont pas disponibles.')
+    else: 
+        flash("Les dates selectionnés ne sont pas valides.")
+    flash(listings)
     return redirect(url_for('checkDate'))
 
 
