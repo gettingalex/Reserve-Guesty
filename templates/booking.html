@@ -18,7 +18,7 @@
       <header class="blog-header py-1" id="top">
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-            <a class="text-muted" href="#"><img src="Fond-transparent-Version-1-NOIR-SDR.png"></a>
+            <a class="text-muted" href="/">Modifier la recherche</a>
           </div>
           <div class="col-4 text-center">
             <a class="blog-header-logo text-dark" href="#">Séjour de Rêve</a>
@@ -41,9 +41,23 @@
         {% endwith %}
       </div>
       <h4>Les dates selectionnés sont disponibles.</h4>
+      <p>{{fromDate}} au {{toDate}}<p>
       <p>Prix moyen par nuit: {{"%.2f" % avgNight}}$</p>
       <p>Sous-Total: {{"%.2f" % subTotal}}$</p>
-      <button type="button" name="reserver" class="btn-primary btn mt-2">Réserver</button>
+      <!--<button type="button" name="reserver" class="btn-primary btn mt-2">Réserver</button>-->
+      <form action="{{ url_for('pay', stripeSubTotal=stripeSubTotal)}}" method="POST">
+        <script
+          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="pk_test_gQRV3GY6b5U8JWDUscP9QKUT"
+          data-amount="{{ stripeSubTotal }}"
+          data-name="Séjour de rêve"
+          data-description="Example charge"
+          data-locale="fr"
+          data-label="Payer par carte"
+          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+          data-zip-code="true">
+        </script>
+    </form>
     </section>
 
     <footer class="blog-footer">
