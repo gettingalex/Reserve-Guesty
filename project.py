@@ -27,6 +27,7 @@ def checkDate():
         exit()
     data = resp.json()
     results = data['results']
+    global newList
     newList = {}
     newList["listings"] = []
     listings = newList["listings"]
@@ -36,9 +37,15 @@ def checkDate():
         'index.html', newList=newList
     )
 
+def listingName(unit):
+    for i in newList["listings"]:
+        if unit == i['id']:
+            return i['nickname']
+
 @app.route('/disponibilites', methods=['POST'])
 def listingForm():
     unit = request.form['unit']
+    nickname = listingName(unit)
     fromDate = request.form['from']
     toDate = request.form['to']
     url = "https://api.guesty.com/api/v2/listings/"+unit+"/calendar?from="+fromDate+"&to="+toDate
@@ -49,9 +56,9 @@ def listingForm():
         print('Status:', resp.status_code, 'Problem with the request. Exiting.')
         exit()
     data = resp.json()
-    newList = {}
-    newList["listings"] = []
-    listings = newList["listings"]
+    DateList = {}
+    DateList["listings"] = []
+    listings = DateList["listings"]
     for i in data:
         listings.append({'date' : i['date'], 'status' : i['status'], 'price' : i['price']})
     period = listings.pop()
@@ -69,14 +76,12 @@ def listingForm():
         if allBooked == True:
             flash('Les dates que vous avez selectionnés ne sont pas disponibles.')
         if allFree == True:
-            flash(unit)
-            return render_template('booking.html', avgNight=avgNight, subTotal=subTotal, pub_key=pub_key, stripeSubTotal=stripeSubTotal, fromDate=fromDate, toDate=toDate)   
+            return render_template('booking.html', avgNight=avgNight, subTotal=subTotal, pub_key=pub_key, stripeSubTotal=stripeSubTotal, fromDate=fromDate, toDate=toDate, nickname=nickname)   
         if allBooked == False and allFree == False:
 
             flash('Certaines dates sélectionnés ne sont pas disponibles.')
     else: 
         flash("Les dates sélectionnés ne sont pas valides.")
-    flash(listings)
     return redirect(url_for('checkDate'))
 
 @app.route('/merci')
