@@ -10,8 +10,9 @@ from requests.auth import HTTPBasicAuth
 
 app = Flask(__name__)
 
+#Keys for Stripe
 pub_key = 'pk_test_gQRV3GY6b5U8JWDUscP9QKUT'
-secret_key_stripe = 'sk_test_ZVGWXHJMkoTWtQsptmaySnIn'
+secret_key_stripe = 'Removed'
 
 stripe.api_key = secret_key_stripe
 
@@ -19,8 +20,8 @@ stripe.api_key = secret_key_stripe
 @app.route('/reserver')
 def checkDate():
     url = "https://api.guesty.com/api/v2/listings/"
-    user = "***Removed***\"
-    password = "***Removed***}"
+    user = "Removed"
+    password = "Removed"
     resp = requests.get(url, auth=HTTPBasicAuth(user, password))
     if resp.status_code != 200: 
         print('Status:', resp.status_code, 'Problem with the request. Exiting.')
@@ -49,8 +50,8 @@ def listingForm():
     fromDate = request.form['from']
     toDate = request.form['to']
     url = "https://api.guesty.com/api/v2/listings/"+unit+"/calendar?from="+fromDate+"&to="+toDate
-    user = "***Removed***\"
-    password = "***Removed***}"
+    user = "Removed"
+    password = "Removed"
     resp = requests.get(url, auth=HTTPBasicAuth(user, password))
     if resp.status_code != 200: 
         print('Status:', resp.status_code, 'Problem with the request. Exiting.')
