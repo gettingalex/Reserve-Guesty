@@ -16,6 +16,7 @@ secret_key_stripe = 'Removed'
 
 stripe.api_key = secret_key_stripe
 
+#Request the name of the units currently listed on Guesty Account
 @app.route('/')
 @app.route('/reserver')
 def checkDate():
@@ -38,11 +39,13 @@ def checkDate():
         'index.html', newList=newList
     )
 
+#Return nickname matching the id of the listings
 def listingName(unit):
     for i in newList["listings"]:
         if unit == i['id']:
             return i['nickname']
 
+#Make API request and check availability against requested data
 @app.route('/disponibilites', methods=['POST'])
 def listingForm():
     unit = request.form['unit']
@@ -89,6 +92,7 @@ def listingForm():
 def merci():
     return render_template('merci.html')
 
+#Make post request to Stripe API for subtotal defined in disponibilites
 @app.route('/pay/<int:stripeSubTotal>/', methods=['POST'])
 def pay (stripeSubTotal):
     customer = stripe.Customer.create(email=request.form['stripeEmail'], source=request.form['stripeToken'])
@@ -96,7 +100,7 @@ def pay (stripeSubTotal):
         customer=customer.id,
         amount=stripeSubTotal,
         currency='usd',
-        description='Reservation - Hebergement - Sejour de Reve',
+        description='Reservation - Hebergement',
         receipt_email='ar_creation@me.com'
         )
 
