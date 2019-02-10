@@ -4,7 +4,7 @@
 
 This tool extracts the listing from Guesty and displays them in a dropdown menu with a datepicker, in order for the user to check the availability. If the unit is available for all the selected period, the users can then make a payment via Stripe. However, if the unit is not available for the entire selected period, a flash message will be returned under the availability form.
 
-*Please note that the code to automatically post the new reservation to Guesty is not included.\
+*Please note that the code to automatically post the new reservation to Guesty is not included.
 
 ## Features
 
@@ -29,10 +29,10 @@ vagrant ssh
 5. Then navigate to the shared directory
 ```
 cd /vagrant
-
+```
 6. Run the application:
 ```
-python project.py\
+python project.py
 ```
 
 7. In the browser, open [http://localhost:5000/](http://localhost:5000/) and use the interface to navigate the web app
